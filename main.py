@@ -22,24 +22,41 @@ def tracker():
     global workout_session
     while True:
         exercise = input("Enter an exercise: ")
-        # workout_session.append(exercise)
-        if not exercise:
+        if not exercise: # Put the IF NOT statement first so that we can catch empty input early
             print("Please enter a valid exercise ")
-            continue
+            continue # the loop continues - it skips everything below this 'continue' statement as it will re-prompt the user to enter something
+        elif exercise: # so if they do enter an exercise. always put th
+            workout_session.append(exercise)
 
         while True:
             try:
-                set_number = int(input(f"Enter set number for {exercise}"))
-                if set_number < 0:
+                set_number = int(input(f"Enter set number for {exercise}: "))
+                if set_number <= 0:
                     print("Set number must be a valid number e.g. 1")
-                else:
+                    continue
+                elif set_number > 0:
                     workout_session.append(set_number)
-                    break # if they enter a valid set number, this particular while loop will be broken
-            except ValueError: # if they enter a non-integer e.g. a string
-                print ("You must enter a number e.g. 1")
+            except ValueError:
+                print("You must enter a number e.g. 1")
 
-print("You completed the following", [workout_session])
+            # while True:
+            #     try:
+            #         weight_lifted_kg = float(input(f"Enter the weight lifted for {exercise}"))
+            #         if weight_lifted_kg < 0.0:
+            #             print("Weight lifted must be at least 0kg")
+            #         elif weight_lifted_kg >=0.0:
+            #             workout_session.append(weight_lifted_kg)
+            #     except ValueError:
+            #             print("You must enter a number e.g. 10 or 10.5")
+                        
+            #     break # break out of the initial outer loop 
 
+            # break
+
+
+def main():
+    tracker()
+    print("You completed the following", [workout_session])
 
 main()
 
