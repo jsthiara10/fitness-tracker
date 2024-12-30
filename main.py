@@ -28,9 +28,9 @@ def tracker():
         elif exercise: # so if they do enter an exercise. always put th
             workout_session.append(exercise)
             break
-    reps(exercise)
+    sets(exercise)
 
-def reps(exercise):
+def sets(exercise):
     global workout_session
     print(f"Enter reps for {exercise}")
     while True:
@@ -44,6 +44,7 @@ def reps(exercise):
                 break
         except ValueError:
             print("You must enter a number e.g. 1")
+
 
 
 def main():
