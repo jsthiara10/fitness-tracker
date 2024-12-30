@@ -1,25 +1,7 @@
-def main():
-    print("Welcome to JST's fitness app")
-    tracker()
-
-workout_session = []
-
-# def tracker(): # OLD, WORKING
-#     global workout_session
-#     exercise = input(f"Enter an exercise: ")
-#     workout_session.append(exercise)
-#     set_number = input(f"Enter set number: ")
-#     workout_session.append(set_number)
-#     weight_lifted_kg = input(f"Enter weight lifted in kgs: ")
-#     workout_session.append(weight_lifted_kg)
-#     reps = input(f"Enter reps performed: ")
-#     workout_session.append(reps)
-#     rest_time = input(f"Enter rest time taken: ")
-#     workout_session.append(rest_time)
-#     print("Workout complete! You did the following in this workout" , workout_session )
+workout_session = [] # global list 
 
 def tracker():
-    global workout_session
+    global workout_session # functions can access the global list so long as you call it at the beginning of the function
     while True:
         exercise = input("Enter an exercise: ")
         if not exercise: # Put the IF NOT statement first so that we can catch empty input early
@@ -28,9 +10,9 @@ def tracker():
         elif exercise: # so if they do enter an exercise. always put th
             workout_session.append(exercise)
             break
-    sets(exercise)
+    set_number(exercise)
 
-def sets(exercise):
+def set_number(exercise):
     global workout_session
     print(f"Enter reps for {exercise}")
     while True:
@@ -45,14 +27,49 @@ def sets(exercise):
         except ValueError:
             print("You must enter a number e.g. 1")
 
+    weight_lifted_kg(exercise, set_number) # position function call OUTSIDE of the while loop
 
+    
+def weight_lifted_kg(exercise, set_number):
+    global workout_session
+    while True:
+        try:
+            weight_lifted_kg = float(input(f"Enter weight lifted (kg) for Set {set_number} of {exercise}: "))
+            if weight_lifted_kg < 0:
+                print("Weight lifted must be greater than 0")
+                continue
+            elif weight_lifted_kg >=0:
+                workout_session.append(weight_lifted_kg)
+                break
+        except ValueError:
+            print("You must enter a number e.g. 1")
+
+    repetitions(exercise, set_number, weight_lifted_kg)
+
+def repetitions(exercise, set_number, weight_lifted_kg):
+    global workout_session
+    while True:
+        try:
+            repetitions = float(input(f"Enter the number of repetitions performed at {weight_lifted_kg} for Set {set_number} of {exercise}"))
+            if repetitions < 0:
+                print("Repetitions performed must be greater than or equal to 0")
+                continue
+            elif repetitions >=0:
+                workout_session.append(repetitions)
+                break
+        except ValueError:
+            print("You must enter number of repetitions e.g. 10 or 10.5")
+
+    rest_time(exercise, set_number, weight_lifted_kg, repetitions)
+
+def rest_time(exercise, set_number, weight_lifted_kg, repetitions):
+    print({exercise}, {set_number}, {weight_lifted_kg}, {repetitions})
 
 def main():
+    print("Welcome to JST's Fitness App")
     tracker()
     print("You completed the following", [workout_session])
 
 main()
-
-# this does a basic append to the function 
 
 # long term functionality - add multiple exercises, sets;  - error handling e.g. if the user inputs an incorrect value 
