@@ -1,6 +1,10 @@
-workout_session = [] # global list 
+# Python Fitness Tracker
 
-def tracker():
+# The Python Fitness Tracker allows the user to record their exercise, set number, weight lifted, reps and rest time
+
+workout_session = [] # global list to store variable data e.g. sets, reps
+
+def tracker(): # User inputs exercise 
     global workout_session # functions can access the global list so long as you call it at the beginning of the function
     while True:
         exercise = input("Enter an exercise: ")
@@ -12,7 +16,7 @@ def tracker():
             break
     set_number(exercise)
 
-def set_number(exercise):
+def set_number(exercise): # User inputs set number 
     global workout_session
     while True:
         try:
@@ -29,7 +33,7 @@ def set_number(exercise):
     weight_lifted_kg(exercise, set_number) # position function call OUTSIDE of the while loop
 
     
-def weight_lifted_kg(exercise, set_number):
+def weight_lifted_kg(exercise, set_number): # User inputs weight lifted 
     global workout_session
     while True:
         try:
@@ -45,7 +49,7 @@ def weight_lifted_kg(exercise, set_number):
 
     repetitions(exercise, set_number, weight_lifted_kg)
 
-def repetitions(exercise, set_number, weight_lifted_kg):
+def repetitions(exercise, set_number, weight_lifted_kg): # User inputs reps performed for input exercise and respective set number 
     global workout_session
     while True:
         try:
@@ -61,7 +65,7 @@ def repetitions(exercise, set_number, weight_lifted_kg):
 
     rest_time(exercise, set_number) # no need to pass through weight lifted or repetitions, as we are not accessing those in the rest_time function
 
-def rest_time(exercise, set_number):
+def rest_time(exercise, set_number): # user inputs rest time taken after their set 
     global workout_session
     while True:
         try:
@@ -76,18 +80,18 @@ def rest_time(exercise, set_number):
             print("You must enter the rest time in seconds (s): ")
     new_record()
 
-def new_record():
+def new_record(): # if the user wants to input a new record i.e. new exercise or another set(s) of the same exercise 
     while True:
         try:
             new_record = input(f"Enter another exercise? Y/N: ").upper()
             if new_record == "N":
-                break
+                break # if they don't want to enter a new exercise, break out of the while loop and return to the main function
             elif new_record == "Y":
-                tracker()
+                tracker() # if they do enter a new exercise, return to the tracker function
         except ValueError:
             print("You must enter Y or N: ")
 
-        break
+        break # break out of the while loop 
 
 
 def main():
@@ -95,7 +99,7 @@ def main():
     tracker()
     print("You completed the following", [workout_session])
 
-main()
+main() # start of the program
 
 
 # long term functionality - add multiple exercises, sets;  - error handling e.g. if the user inputs an incorrect value 
