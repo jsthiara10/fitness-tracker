@@ -14,6 +14,9 @@ def tracker(): # User inputs exercise
         elif exercise: # so if they do enter an exercise. always put th
             workout_session.append(exercise)
             break
+        #We can remove the elif if we use a continue
+        #Reduces 'Code Complexity' and is cleaner
+        #This type of code is called a 'guard clause'
     set_number(exercise)
 
 def set_number(exercise): # User inputs set number 
@@ -27,6 +30,7 @@ def set_number(exercise): # User inputs set number
             elif set_number > 0:
                 workout_session.append(set_number)
                 break
+            #Do not need an elif check again if we go with the guard clause
         except ValueError:
             print("You must enter a number e.g. 1")
 
@@ -87,6 +91,8 @@ def new_record(): # if the user wants to input a new record i.e. new exercise or
             if new_record == "N":
                 break # if they don't want to enter a new exercise, break out of the while loop and return to the main function
             elif new_record == "Y":
+                #Worth keeping the elif here as
+                #User can type anything in theory
                 tracker() # if they do enter a new exercise, return to the tracker function
         except ValueError:
             print("You must enter Y or N: ")
@@ -95,6 +101,7 @@ def new_record(): # if the user wants to input a new record i.e. new exercise or
 
 
 def main():
+    #JT Icemans fitness app*
     print("Welcome to JST's Fitness App")
     tracker()
     print("You completed the following", [workout_session])
