@@ -1,6 +1,6 @@
 # Python Fitness Tracker
 
-# The Python Fitness Tracker allows the user to record their exercise, set number, weight lifted, reps and rest time
+# The Python Fitness Tracker allows the user to record their exercise, set number, weight lifted, reps and rest time.
 
 workout_session = [] # global list to store variable data e.g. sets, reps
 
