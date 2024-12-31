@@ -14,7 +14,6 @@ def tracker():
 
 def set_number(exercise):
     global workout_session
-    print(f"Enter reps for {exercise}")
     while True:
         try:
             set_number = int(input(f"Enter set number for {exercise}: "))
@@ -50,7 +49,7 @@ def repetitions(exercise, set_number, weight_lifted_kg):
     global workout_session
     while True:
         try:
-            repetitions = float(input(f"Enter the number of repetitions performed at {weight_lifted_kg} for Set {set_number} of {exercise}"))
+            repetitions = float(input(f"Enter the number of repetitions performed at {weight_lifted_kg} kg for Set {set_number} of {exercise}: "))
             if repetitions < 0:
                 print("Repetitions performed must be greater than or equal to 0")
                 continue
@@ -60,10 +59,36 @@ def repetitions(exercise, set_number, weight_lifted_kg):
         except ValueError:
             print("You must enter number of repetitions e.g. 10 or 10.5")
 
-    rest_time(exercise, set_number, weight_lifted_kg, repetitions)
+    rest_time(exercise, set_number) # no need to pass through weight lifted or repetitions, as we are not accessing those in the rest_time function
 
-def rest_time(exercise, set_number, weight_lifted_kg, repetitions):
-    print({exercise}, {set_number}, {weight_lifted_kg}, {repetitions})
+def rest_time(exercise, set_number):
+    global workout_session
+    while True:
+        try:
+            rest_time = float(input(f"Enter the rest time for Set {set_number} of {exercise} in seconds (s): "))
+            if rest_time < 0:
+                print("Rest time must be greater than or equal to 0")
+                continue
+            elif rest_time >= 0:
+                workout_session.append(rest_time)
+                break
+        except ValueError:
+            print("You must enter the rest time in seconds (s): ")
+    new_record()
+
+def new_record():
+    while True:
+        try:
+            new_record = input(f"Enter another exercise? Y/N: ").upper()
+            if new_record == "N":
+                break
+            elif new_record == "Y":
+                tracker()
+        except ValueError:
+            print("You must enter Y or N: ")
+
+        break
+
 
 def main():
     print("Welcome to JST's Fitness App")
@@ -71,5 +96,6 @@ def main():
     print("You completed the following", [workout_session])
 
 main()
+
 
 # long term functionality - add multiple exercises, sets;  - error handling e.g. if the user inputs an incorrect value 
