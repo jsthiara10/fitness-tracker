@@ -10,10 +10,9 @@ def tracker(): # User inputs exercise
         exercise = input("Enter an exercise: ")
         if not exercise: # Put the IF NOT statement first so that we can catch empty input early
             print("Please enter a valid exercise ")
-            continue # the loop continues - it skips everything below this 'continue' statement as it will re-prompt the user to enter something
-        elif exercise: # so if they do enter an exercise. always put th
-            workout_session.append(exercise)
-            break
+            continue # removed elif as continue does the same thing - GUARD CLAUSE
+        workout_session.append(exercise)
+        break
     set_number(exercise)
 
 def set_number(exercise): # User inputs set number 
@@ -24,9 +23,8 @@ def set_number(exercise): # User inputs set number
             if set_number <= 0:
                 print("Set number must be a valid number e.g. 1")
                 continue
-            elif set_number > 0:
-                workout_session.append(set_number)
-                break
+            workout_session.append(set_number)
+            break
         except ValueError:
             print("You must enter a number e.g. 1")
 
