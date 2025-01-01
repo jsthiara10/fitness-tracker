@@ -2,6 +2,9 @@
 
 # The Python Fitness Tracker allows the user to record their exercise, set number, weight lifted, reps and rest time.
 
+import datetime # add a timestamp 
+dt = datetime.datetime.today() # current date/time
+
 workout_session = [] # global list to store variable data e.g. sets, reps
 
 def tracker(): # User inputs exercise 
@@ -95,7 +98,7 @@ def new_record(): # if the user wants to input a new record i.e. new exercise or
 def main():
     print("Welcome to JST's Fitness App")
     tracker()
-    print("You completed the following", [workout_session])
+    print("You completed the following", dt, [workout_session])
 
 main() # start of the program
 
